@@ -2,20 +2,24 @@ require_relative("class")
 
 class Manager
 
-  def initialize
+  attr_reader :classes
+
+  def initialize()
     @classes = []
     @max_c_name = 0
   end
 
-  def add_class(code)
-    @classes.insert(@classes.length, Class.new(code))
+  def add_class(name)
+    @classes.insert(@classes.length, Class.new(name))
     if @max_c_name < name.length  
       @max_c_name = name.length
     end
   end
 
-  def find_class (name)
+  def find_class(name)
     @classes.each do |c|
+      puts "#{c.name} 1"
+        
       if name.eql? c.name
         return c      
       else
@@ -33,7 +37,7 @@ class Manager
       for i in 0..((@max_c_name - c.name.length)+4)
         print " "
       end
-      print " | " + c.status + "\n"
+      puts " | "
     end
     puts "\n\nAperte ENTER para voltar"
     gets.chomp

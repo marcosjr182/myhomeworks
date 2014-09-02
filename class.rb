@@ -2,8 +2,10 @@ require_relative("subject")
 
 class Class
 
-  def initialize (code)
-    @code = code
+  attr_reader :name
+
+  def initialize (name)
+    @name = name
     @subjects = []
     @max_sub_name = 0
   end
