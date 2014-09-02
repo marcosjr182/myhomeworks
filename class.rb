@@ -5,10 +5,14 @@ class Class
   def initialize (code)
     @code = code
     @subjects = []
+    @max_sub_name = 0
   end
 
   def add_subject(name)
-    @subjects.insert(Subject.new(name))
+    @subjects.insert(@subjects.length, Subject.new(name))
+    if @max_sub_name < name.length
+      @max_sub_name = name.length
+    end
   end
 
   def del_subject (name)
@@ -18,6 +22,7 @@ class Class
       puts "\n Disciplina excluida com sucesso! \n"
     else
       puts "\n This subject does not exist for this class." 
+    end
   end
 
   def find_subject (name)
@@ -30,11 +35,18 @@ class Class
     end
   end
 
-  def show_subjects
-    puts "\n Disciplinas da turma: " + @name
+  def show_subjects()
+    puts "\nDisciplinas da turma: #{@code} "
+    puts "--------------------------------------"
     @subjects.each do |sub|
-      puts sub.name
+      print sub.name
+      for i in 0..((@max_sub_name - sub.name.length)+4) do
+        print " "
+      end
+      puts " | "
     end
+
   end
+
 
 end
