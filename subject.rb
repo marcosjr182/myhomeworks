@@ -18,6 +18,16 @@ class Subject
     end
   end
 
+  def find_homework (name)
+    @homeworks.each do |hw|
+      if name.eql? hw.name
+        return hw
+      else
+        return nil
+      end
+    end
+  end
+
   def show_homeworks
     system("clear")
     puts "\nTarefas da disciplina: #{@name}" 
@@ -34,7 +44,7 @@ class Subject
   end
 
   def del_homework (name)
-    hw = find_subject(name)
+    hw = find_homework(name)
     if hw != nil
       @homeworks.delete(hw)
       puts "\n Tarefa excluida com sucesso! \n"
