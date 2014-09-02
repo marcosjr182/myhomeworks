@@ -27,7 +27,7 @@ class Class
 
   def find_subject (name)
     @subjects.each do |s|
-      if s.name.equals? name
+      if name.eql? s.name
         return s
       else
         return nil
@@ -36,6 +36,7 @@ class Class
   end
 
   def show_subjects()
+    system("clear")
     puts "\nDisciplinas da turma: #{@code} "
     puts "--------------------------------------"
     @subjects.each do |sub|
@@ -45,7 +46,8 @@ class Class
       end
       puts " | "
     end
-
+    puts "\n\nAperte ENTER para voltar"
+    gets.chomp
   end
 
 
