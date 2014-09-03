@@ -18,8 +18,6 @@ class Manager
 
   def find_class(name)
     @classes.each do |c|
-      puts "#{c.name} 1"
-        
       if name.eql? c.name
         return c      
       else
@@ -39,8 +37,7 @@ class Manager
       end
       puts " | "
     end
-    puts "\n\nAperte ENTER para voltar"
-    gets.chomp
+    
   end
 
   def del_class (name)

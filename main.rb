@@ -1,22 +1,59 @@
 require_relative("manager")
 
-manager = Manager.new()
+@manager = Manager.new()
 
-manager.add_class("EM1A")
-manager.add_class("EM2A")
-manager.show_classes
+def show_classes
+  @manager.show_classes
+  puts "\n\nEscolha uma ação: "
+  puts "1 - Entrar na turma "
+  puts "0 - Sair"
+  op = gets.chomp.to_i
 
-atual = manager.find_class("EM1A")
-#atual.show_subjects
+  if op == 1 
+    exists = false
+    name = ""
+    
+    while !exists do
+      puts "Digite o nome da turma desejada:"
+      name = gets.chomp
+      if @manager.find_class(name) != nil 
+        exists = true
+      end
+    end
+    
+    enter_class(name)
+  end
 
-puts "\nmyHomeworks--------"
-atual.add_subject("Matematica")
-atual.add_subject("Matematica22")
+  return nil
+end
 
-sub = atual.find_subject("Matematica")
-sub.add_homework("teste","20/12/1992")
-sub.add_homework("testsasae","20/12/1992")
-sub.add_homework("tdoKAsodk assae","20/12/1992")
-sub.show_homeworks()
+
+def call_menu
+  loop do |op|
+    system("clear")
+    puts("MENU ------------------")
+    puts("1 - Criar Turma")
+    puts("2 - Listar Turmas")
+    puts("0 - SAIR")
+    op = gets.chomp.to_i
+    break if op == 0
+
+    if op == 1
+      puts "Digite o código da turma: "
+      name = gets.chomp
+      @manager.add_class(name)
+    elsif op == 2 
+      show_classes
+    end
+  end
+end
+
+
+call_menu
+
+
+
+
+
 
 
