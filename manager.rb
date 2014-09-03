@@ -2,8 +2,6 @@ require_relative("class")
 
 class Manager
 
-  attr_reader :classes
-
   def initialize()
     @classes = []
     @max_c_name = 0
@@ -37,7 +35,6 @@ class Manager
       end
       puts " | "
     end
-    
   end
 
   def del_class (name)

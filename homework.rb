@@ -1,6 +1,6 @@
 class Homework
 
-  attr_reader :name, :status
+  attr_accessor :name, :status
 
   def initialize (name, deadline)
     @name = name

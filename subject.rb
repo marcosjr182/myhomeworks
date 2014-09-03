@@ -2,7 +2,7 @@ require_relative("homework")
 
 class Subject
 
-  attr_reader :name
+  attr_accessor :name
 
   def initialize (name)
     @name = name
