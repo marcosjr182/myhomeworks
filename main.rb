@@ -2,6 +2,53 @@ require_relative("manager")
 
 @manager = Manager.new()
 
+def show_subjects(this_class)
+  
+  this_class.show_subjects
+  puts "Escolha uma ação: "
+  puts "1 - Entrar na matéria "
+  puts "0 - Sair"
+  op = gets.chomp.to_i
+
+  if op == 1 
+    exists = false
+    name = ""
+    
+    while !exists do
+      puts "Digite o nome da matéria desejada:"
+      name = gets.chomp
+      if this_class.find_subject(name) != nil 
+        exists = true
+      end
+    end
+    
+    enter_subject(name)
+  end
+
+end
+
+def add_subject(this_class)
+
+  exists = false  
+  while !exists do
+  
+    puts "Digite o nome da matéria: #{this_class.name} "
+    name = gets.chomp
+
+    sub = this_class.find_subject(name)
+    if sub != nil
+      exists = true
+      puts "Matéria já exite! Tente outro nome."
+    else
+
+      this_class.add_subject(name)
+    end
+    
+  end
+
+  enter_class(this_class.name)
+end
+
 def enter_class(name)
   this_class = @manager.find_class(name)
   system("clear")
@@ -20,9 +67,9 @@ def enter_class(name)
     this_class.name = name
     enter_class(name)
   elsif op == 2
-    add_subject
+    add_subject(this_class)
   elsif op == 3
-    show_subjects
+    show_subjects(this_class)
   end
 
   return nil
@@ -75,11 +122,7 @@ def call_menu
 end
 
 
+
 call_menu
-
-
-
-
-
 
 

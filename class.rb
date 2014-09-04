@@ -39,7 +39,7 @@ class Class
 
   def show_subjects()
     system("clear")
-    puts "\nDisciplinas da turma: #{@code} "
+    puts "\nDisciplinas da turma: #{@name} "
     puts "--------------------------------------"
     @subjects.each do |sub|
       print sub.name
@@ -48,8 +48,6 @@ class Class
       end
       puts " | "
     end
-    puts "\n\nAperte ENTER para voltar"
-    gets.chomp
   end
 
 
