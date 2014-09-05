@@ -94,7 +94,6 @@ def enter_subject(this_class, subject)
   return nil
 end
 
-
 def show_subjects(this_class)
   
   this_class.show_subjects
@@ -213,6 +212,27 @@ def call_menu
     end
   end
 end
+
+# Exemplos 
+@manager.add_class("1B")
+@manager.add_class("2A")
+
+
+c = @manager.find_class("1B")
+c.add_subject("Portugues")
+s = c.find_subject("Portugues")
+s.add_homework("Aprender a escrever", "12/12/2012")
+s.add_homework("Aprender a ler", "12/12/2011")
+
+c.add_subject("Quimica")
+s = c.find_subject("Quimica")
+s.add_homework("Decorar a tabela periodica", "12/12/2890")
+
+c = @manager.find_class("2A")
+c.add_subject("Jogos")
+s = c.find_subject("Jogos")
+s.add_homework("Zerar o GTA", "12/12/2120")
+s.add_homework("Zerar o Minecraft", "12/12/2000")
 
 
 call_menu
