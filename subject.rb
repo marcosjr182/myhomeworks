@@ -22,10 +22,9 @@ class Subject
     @homeworks.each do |hw|
       if name.eql? hw.name
         return hw
-      else
-        return nil
       end
     end
+    return nil
   end
 
   def show_homeworks

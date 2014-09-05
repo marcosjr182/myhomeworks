@@ -27,14 +27,14 @@ class Class
     end
   end
 
-  def find_subject (name)
+  def find_subject(name)
     @subjects.each do |s|
       if name.eql? s.name
         return s
-      else
-        return nil
       end
     end
+
+    return nil  
   end
 
   def show_subjects()

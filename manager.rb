@@ -18,10 +18,9 @@ class Manager
     @classes.each do |c|
       if name.eql? c.name
         return c      
-      else
-        return nil
       end
     end
+    return nil
   end
 
   def show_classes

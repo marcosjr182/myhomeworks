@@ -29,23 +29,20 @@ end
 
 def add_subject(this_class)
 
-  exists = false  
-  while !exists do
-  
-    puts "Digite o nome da matéria: #{this_class.name} "
+  loop do
+    puts "Digite o nome da matéria:"
     name = gets.chomp
 
-    sub = this_class.find_subject(name)
-    if sub != nil
-      exists = true
-      puts "Matéria já exite! Tente outro nome."
-    else
-
-      this_class.add_subject(name)
-    end
+    this_class.show_subjects
+    puts "#{name}"
+    s = this_class.find_subject(name)
+    s == nil ? exists = false : exists = true
     
-  end
+    this_class.add_subject(name) if s == nil
 
+    break if exists == false  
+  end
+    
   enter_class(this_class.name)
 end
 
@@ -120,9 +117,5 @@ def call_menu
     end
   end
 end
-
-
-
-call_menu
 
 
