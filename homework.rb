@@ -1,6 +1,6 @@
 class Homework
 
-  attr_accessor :name, :status
+  attr_accessor :name,:status, :deadline
 
   def initialize (name, deadline)
     @name = name
@@ -13,6 +13,14 @@ class Homework
       @status = "FEITO"
     else 
       @status = "EM ESPERA"
+    end
+  end
+
+  def get_status()
+    if status == "FEITO"
+      return true 
+    else 
+      return false
     end
   end
 

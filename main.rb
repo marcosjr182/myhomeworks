@@ -1,11 +1,104 @@
 require_relative("manager")
 
 @manager = Manager.new()
+@this_class = nil
+
+def show_homeworks(subject)
+  
+  name = ""
+  subject.show_homeworks
+  puts "\nEscolha uma ação: "
+  puts "1 - Mudar Status "
+  puts "2 - Excluir tarefa "
+  puts "0 - Sair"
+  op = gets.chomp.to_i
+
+  if op == 1 || op == 2
+    exists = false
+    
+    while !exists do
+      puts "Digite o nome da matéria desejada:"
+      name = gets.chomp
+      if subject.find_homework(name) != nil 
+        exists = true
+      end
+    end
+  end
+
+  if op == 1
+    hw = subject.find_homework(name)
+    hw.set_status(!hw.get_status)
+    show_homeworks(subject)
+  elsif op == 2 
+    subject.del_homework(name)
+    enter_subject(@this_class, subject)
+  end
+
+  enter_subject(@this_class, subject)
+end
+
+def add_homework(subject)
+
+  # ask the homework name
+  name = ""
+  loop do
+    puts "Digite o nome da tarefa:"
+    name = gets.chomp
+
+    s = subject.find_homework(name)
+    s == nil ? exists = false : exists = true
+    
+    break if exists == false  
+  end
+
+  #ask the homework deadline DD/MM/YYYY
+  date = ""
+  loop do
+    puts "Digite a data limite da tarefa (Use o formato DD/MM/AAAA):  "
+    date = gets.chomp
+
+    break if date.length == 10 && date[2] == "/" && date[5] == "/"
+  end
+  
+  subject.add_homework(name, date)
+  enter_subject(@this_class, subject)
+end
+
+def enter_subject(this_class, subject)
+  @this_class = this_class
+  system("clear")
+  puts "Você está na matéria: #{subject.name}"
+  puts "--------------------------------------------"
+  puts "Escolha uma ação: "
+  puts "1 - Criar tarefa"
+  puts "2 - Listar tarefas"
+  puts "3 - Editar nome da matéria "
+  puts "4 - Excluir esta matéria"
+  puts "0 - Sair"
+  op = gets.chomp.to_i
+
+  if op == 1 
+    add_homework(subject)
+  elsif op == 2
+    show_homeworks(subject)
+  elsif op == 3
+    puts "Digite um novo nome para a matéria:"
+    name = gets.chomp
+    subject.name = name
+    enter_subject(this_class, subject)
+  elsif op == 4
+    this_class.del_subject(subject.name)
+    return nil
+  end
+
+  return nil
+end
+
 
 def show_subjects(this_class)
   
   this_class.show_subjects
-  puts "Escolha uma ação: "
+  puts "\nEscolha uma ação: "
   puts "1 - Entrar na matéria "
   puts "0 - Sair"
   op = gets.chomp.to_i
@@ -22,9 +115,10 @@ def show_subjects(this_class)
       end
     end
     
-    enter_subject(name)
+    enter_subject(this_class, this_class.find_subject(name))
   end
 
+  enter_class(this_class.name)
 end
 
 def add_subject(this_class)
@@ -33,8 +127,6 @@ def add_subject(this_class)
     puts "Digite o nome da matéria:"
     name = gets.chomp
 
-    this_class.show_subjects
-    puts "#{name}"
     s = this_class.find_subject(name)
     s == nil ? exists = false : exists = true
     
@@ -51,22 +143,26 @@ def enter_class(name)
   system("clear")
   puts "Você está na turma: #{this_class.name}"
   puts "--------------------------------------------"
-  puts "\nEscolha uma ação: "
-  puts "1 - Editar nome da turma "
-  puts "2 - Criar matéria"
-  puts "3 - Listar matérias"
+  puts "Escolha uma ação: "
+  puts "1 - Criar matéria"
+  puts "2 - Listar matérias"
+  puts "3 - Editar nome da turma "
+  puts "4 - Excluir esta Turma"
   puts "0 - Sair"
   op = gets.chomp.to_i
 
   if op == 1 
+    add_subject(this_class)
+  elsif op == 2
+    show_subjects(this_class)
+  elsif op == 3
     puts "Digite um novo nome para a turma:"
     name = gets.chomp
     this_class.name = name
     enter_class(name)
-  elsif op == 2
-    add_subject(this_class)
-  elsif op == 3
-    show_subjects(this_class)
+  elsif op == 4
+    @manager.del_class(name)
+    return nil
   end
 
   return nil
@@ -119,3 +215,4 @@ def call_menu
 end
 
 
+call_menu

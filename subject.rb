@@ -36,10 +36,8 @@ class Subject
       for i in 0..((@max_hw_name - hw.name.length)+4)
         print " "
       end
-      print " | " + hw.status + "\n"
+      print " | #{hw.deadline} | #{hw.status} \n"
     end
-    puts "\n\nAperte ENTER para voltar"
-    gets.chomp
   end
 
   def del_homework (name)
