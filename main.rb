@@ -235,5 +235,4 @@ s.add_homework("Zerar o GTA", "12/12/2120")
 s.add_homework("Zerar o Minecraft", "12/12/2000")
 
 
-#call_menu
-puts @manager.class
+call_menu

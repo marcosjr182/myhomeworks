@@ -1,5 +1,5 @@
 myHomeworks
-===========
+=====
 
 Homeworks manager
 
